@@ -1,0 +1,45 @@
+import Head from "next/head";
+
+<Head>
+  <title>MONOREPO-RTL</title>
+  <script>foo = 55</script>
+</Head>
+
+# MONOREPO-RTL
+
+```js
+const foo = 55;
+```
+
+## INTRO
+
+**Manage all projects related to react testing library using the turborepo monorepo manager.**
+
+| <div style={{ width: 50 }} /> | project                        | description                                                 |
+| ----------------------------- | :----------------------------- | :---------------------------------------------------------- |
+|                               | [docs]                         | document this monorepo. uses next + mdx. [mdx docs][how-to] |
+|                               | [rtl-examples]                 | components collection with tests                            |
+|                               | [rtl-ninja]                    | todo app with api and rtl tests                             |
+|                               | [rtl-taskhero]                 | todo app with api and rtl tests                             |
+|                               | <div style={{ width: 170 }} /> |                                                             |
+
+[docs]: http://localhost:3000
+[rtl-examples]: http://localhost:3001
+[rtl-ninja]: http://localhost:3002
+[rtl-taskhero]: http://localhost:3003
+[how-to]: https://stackoverflow.com/questions/71864146/using-remark-and-rehype-plugins-with-mdx-in-next-js-with-next-mdx
+
+<br />
+
+## COMMANDS FOR ALL WORKSPACES
+
+- <Code>yarn dev</Code> run all workspaces in dev mode
+- <Code>yarn start</Code> start all workspaces in production mode
+- <Code>yarn build</Code> build all workspaces
+- <Code>yarn lint</Code> lint all workspaces
+- <Code>yarn test</Code> test all workspaces
+
+## COMMANDS FOR SINGLE WORKSPACES
+
+- <Code>yarn workspace -name- dev</Code> run a single workspace in dev mode
+- <Code>yarn workspace -name- start</Code> start a single workspace in production mode

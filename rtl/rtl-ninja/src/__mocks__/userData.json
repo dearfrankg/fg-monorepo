@@ -1,0 +1,178 @@
+{
+  "results": [
+    {
+      "gender": "female",
+      "name": { "title": "Ms", "first": "Cassandre", "last": "Hubert" },
+      "location": {
+        "street": { "number": 8975, "name": "Route de Genas" },
+        "city": "Fort-de-France",
+        "state": "Indre-et-Loire",
+        "country": "France",
+        "postcode": 94349,
+        "coordinates": { "latitude": "-20.6984", "longitude": "42.7723" },
+        "timezone": { "offset": "-5:00", "description": "Eastern Time (US & Canada), Bogota, Lima" }
+      },
+      "email": "cassandre.hubert@example.com",
+      "login": {
+        "uuid": "27f4e558-e351-4c67-b1f5-b9ba9bc573a9",
+        "username": "greenpanda653",
+        "password": "zander",
+        "salt": "pwfVzE9g",
+        "md5": "62c73eab3b638835a56b8d10f8f580f6",
+        "sha1": "519eb045b78498db41e75ac3af02088d7e097db5",
+        "sha256": "fa492b0543cc49168eb5332567c9e60f6b034376a61e26ea1949a45baa7a709d"
+      },
+      "dob": { "date": "1984-12-25T04:17:08.806Z", "age": 37 },
+      "registered": { "date": "2015-01-21T16:00:14.335Z", "age": 7 },
+      "phone": "04-73-42-66-56",
+      "cell": "06-61-91-53-28",
+      "id": { "name": "INSEE", "value": "2841171761443 64" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/59.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/59.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/59.jpg"
+      },
+      "nat": "FR"
+    },
+    {
+      "gender": "male",
+      "name": { "title": "Mr", "first": "Mark", "last": "Høyvik" },
+      "location": {
+        "street": { "number": 6728, "name": "Stjerneveien" },
+        "city": "Skodje",
+        "state": "Sogn og Fjordane",
+        "country": "Norway",
+        "postcode": "3220",
+        "coordinates": { "latitude": "8.2194", "longitude": "61.9012" },
+        "timezone": {
+          "offset": "0:00",
+          "description": "Western Europe Time, London, Lisbon, Casablanca"
+        }
+      },
+      "email": "mark.hoyvik@example.com",
+      "login": {
+        "uuid": "b3f1953d-c1ca-4276-ab29-67adbbda2acc",
+        "username": "crazygoose689",
+        "password": "iawgk2",
+        "salt": "OkOXYkit",
+        "md5": "65f22530331812e1b25d51352185e5c3",
+        "sha1": "e734fd1696d7e06b5f7bd3026518f00302cc563d",
+        "sha256": "b3be34a180492d4e486141fa31fdac36b1904579bea26d901ef127179313dd09"
+      },
+      "dob": { "date": "1998-09-18T14:58:17.979Z", "age": 24 },
+      "registered": { "date": "2007-04-26T12:02:59.960Z", "age": 15 },
+      "phone": "58341349",
+      "cell": "92980080",
+      "id": { "name": "FN", "value": "18099835121" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/65.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/65.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/65.jpg"
+      },
+      "nat": "NO"
+    },
+    {
+      "gender": "female",
+      "name": { "title": "Mrs", "first": "Sophia", "last": "Freeman" },
+      "location": {
+        "street": { "number": 2670, "name": "Park Lane" },
+        "city": "Glasgow",
+        "state": "Lancashire",
+        "country": "United Kingdom",
+        "postcode": "T27 6AN",
+        "coordinates": { "latitude": "-59.6635", "longitude": "-133.1704" },
+        "timezone": { "offset": "+1:00", "description": "Brussels, Copenhagen, Madrid, Paris" }
+      },
+      "email": "sophia.freeman@example.com",
+      "login": {
+        "uuid": "5746af4a-7e47-4257-b93e-d00e1457ad49",
+        "username": "tinyswan290",
+        "password": "wyoming",
+        "salt": "8vL3rxMF",
+        "md5": "b8bacd9e158516f34a9f04ded70a54d7",
+        "sha1": "a1eac04e918306c448d5ca53cd7f6d3c7a02582d",
+        "sha256": "4d007ecd958264c10384f47aa2ae6c79a7a2f08761d427b08e7b3c6cbb462250"
+      },
+      "dob": { "date": "1971-10-29T10:35:42.798Z", "age": 50 },
+      "registered": { "date": "2015-12-09T02:46:57.687Z", "age": 6 },
+      "phone": "01164 795624",
+      "cell": "07882 095771",
+      "id": { "name": "NINO", "value": "LR 11 79 46 R" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/51.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/51.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/51.jpg"
+      },
+      "nat": "GB"
+    },
+    {
+      "gender": "female",
+      "name": { "title": "Miss", "first": "Tonya", "last": "Rivera" },
+      "location": {
+        "street": { "number": 8017, "name": "Mockingbird Hill" },
+        "city": "Traralgon",
+        "state": "Tasmania",
+        "country": "Australia",
+        "postcode": 7837,
+        "coordinates": { "latitude": "-2.3421", "longitude": "-83.8880" },
+        "timezone": { "offset": "+2:00", "description": "Kaliningrad, South Africa" }
+      },
+      "email": "tonya.rivera@example.com",
+      "login": {
+        "uuid": "9581f59e-46a8-4fed-b7a8-011ce8612a7b",
+        "username": "greengoose635",
+        "password": "glory",
+        "salt": "Z1PBzWOV",
+        "md5": "8c0406254db2f3611aa71918e5b6ecfe",
+        "sha1": "77bbef28eb7dcb77fcc3604a7ebc84e5bd2cd7a3",
+        "sha256": "185b3024e5f1d41e6a3e39ecfe38c463aeafe6b5cd0fca57dc732dda5706421f"
+      },
+      "dob": { "date": "1977-06-12T16:21:16.824Z", "age": 45 },
+      "registered": { "date": "2005-07-23T03:39:31.634Z", "age": 17 },
+      "phone": "05-7944-8206",
+      "cell": "0437-217-182",
+      "id": { "name": "TFN", "value": "559525901" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/22.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/22.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/22.jpg"
+      },
+      "nat": "AU"
+    },
+    {
+      "gender": "male",
+      "name": { "title": "Mr", "first": "Dharun", "last": "Naik" },
+      "location": {
+        "street": { "number": 5814, "name": "Camac St" },
+        "city": "Muzaffarpur",
+        "state": "Arunachal Pradesh",
+        "country": "India",
+        "postcode": 86731,
+        "coordinates": { "latitude": "85.6344", "longitude": "14.9391" },
+        "timezone": { "offset": "-3:30", "description": "Newfoundland" }
+      },
+      "email": "dharun.naik@example.com",
+      "login": {
+        "uuid": "94798471-06c8-4f02-9876-478c3aab987c",
+        "username": "goldenfish564",
+        "password": "cheetah",
+        "salt": "TC2JIa5N",
+        "md5": "67872df1b153ae0cf720a9ef4d874d17",
+        "sha1": "59edc97b6a509b9717661a0d0640fe229c36a50d",
+        "sha256": "381c6e15efed395379b4557b47e1fe687cc2b13c2d3f7e981ba48a62b23a707b"
+      },
+      "dob": { "date": "1963-01-07T12:58:22.909Z", "age": 59 },
+      "registered": { "date": "2010-12-08T18:11:22.431Z", "age": 11 },
+      "phone": "7795582441",
+      "cell": "9539281248",
+      "id": { "name": "UIDAI", "value": "718748516126" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/80.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/80.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/80.jpg"
+      },
+      "nat": "IN"
+    }
+  ],
+  "info": { "seed": "16ffdc9ce83e00bf", "results": 5, "page": 1, "version": "1.4" }
+}

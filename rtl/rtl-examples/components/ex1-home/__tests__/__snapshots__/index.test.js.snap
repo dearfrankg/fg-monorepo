@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ex1 <Home /> --- uses jest snapshots rendering component matches snapshot 1`] = `
+<div>
+  <div
+    style="display: flex; justify-content: center; align-items: flex-start; text-align: center;"
+  >
+    <main>
+      <h1>
+        React Testing Library Examples
+      </h1>
+      <span
+        class="ant-typography"
+      >
+        <code>
+          cd app_dir; yarn test
+        </code>
+      </span>
+    </main>
+  </div>
+</div>
+`;

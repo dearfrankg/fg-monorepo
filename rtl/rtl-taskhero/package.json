@@ -1,0 +1,58 @@
+{
+    "name": "rtl-taskhero",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@testing-library/jest-dom": "^5.11.6",
+        "@testing-library/react": "^11.2.2",
+        "@testing-library/user-event": "^12.6.0",
+        "@types/jest": "^24.0.0",
+        "@types/node": "^12.0.0",
+        "@types/react": "^16.9.0",
+        "@types/react-dom": "^16.9.0",
+        "@types/styled-components": "^5.1.0",
+        "@types/uuid": "^8.3.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "4.0.3",
+        "react-spinner-material": "^1.3.1",
+        "react-toastify": "^6.1.0",
+        "styled-components": "^5.1.1",
+        "swr": "^0.3.8",
+        "typescript": "~3.7.2",
+        "use-http": "^1.0.15",
+        "uuid": "^8.3.1"
+    },
+    "scripts": {
+        "dev": "PORT=3102 react-scripts start",
+        "start": "PORT=3102 react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "format": "prettier --write '**/*.{ts,tsx, json}'"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@testing-library/react-hooks": "^3.7.0",
+        "express": "^4.17.1",
+        "jest-localstorage-mock": "^2.4.3",
+        "msw": "^0.24.2",
+        "prettier": "^2.0.5",
+        "react-test-renderer": "^16.13.1",
+        "tsconfig": "*"
+    }
+}

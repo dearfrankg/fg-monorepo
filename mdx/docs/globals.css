@@ -1,0 +1,22 @@
+body {
+  margin: 30px;
+  width: unset;
+  height: unset;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline transparent;
+  transition: 0.25s ease-in-out;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+.max-width-container {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 10px;
+}
