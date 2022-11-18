@@ -7,7 +7,9 @@ const options = [
   { label: "🐶", value: "dog" },
 ];
 
-const handleChange = jest.fn();
+const handleChange = (a, b) => {
+  console.log("a,b: ", a, b);
+};
 
 const resources = {
   renderSelect: (props = {}) => {
@@ -30,12 +32,45 @@ const resources = {
     });
   },
 
+  waitForListClosed: async () => {
+    await waitFor(() => {
+      expect(
+        screen.getByTestId("myselect").className.split(" ").includes("ant-select-open")
+      ).toBeFalsy();
+    });
+  },
+
+  waitForSelection: async (optionText) => {
+    const listbox = screen.getByRole("listbox");
+
+    await waitFor(() => {
+      const [option] = document.querySelectorAll(".ant-select-item-option");
+      expect(option).toBeDefined();
+      expect(option).toHaveClass("ant-select-item-option-selected");
+      const altOption = within(listbox).getByLabelText(optionText);
+      expect(altOption).toBeDefined();
+      expect(altOption.getAttribute("aria-selected")).toBe("true");
+    });
+  },
+
   clickOption: (optionText) => {
     const options = screen.getAllByText(optionText);
-    console.log("options: ", options.length);
     const [option] = options;
-    userEvent.click(option); //, undefined, { skipPointerEventsCheck: true });
+    userEvent.click(option, undefined, { skipPointerEventsCheck: true });
     return option;
+  },
+
+  getSelection: () => {
+    const listbox = screen.getByRole("listbox");
+    const options = within(listbox).getAllByRole("option");
+    const names = [];
+    for (let option of options) {
+      if (option.getAttribute("aria-selected") === "true") {
+        names.push(option.getAttribute("aria-label"));
+      }
+    }
+
+    return names;
   },
 
   getSelectionByClickingOption: async (optionText) => {
@@ -45,7 +80,7 @@ const resources = {
     const select = screen.getByRole("combobox");
     userEvent.click(select);
     await waitForListOpen();
-    const listbox = screen.getByRole("listbox");
+    console.log("before click:", getSelection());
 
     //
     // Click on option
@@ -53,14 +88,8 @@ const resources = {
     const option = screen.getByText(optionText);
     console.log("clicking on: ", optionText);
     userEvent.click(option);
-    await waitFor(() => {
-      const [option] = document.querySelectorAll(".ant-select-item-option");
-      expect(option).toBeDefined();
-      expect(option).toHaveClass("ant-select-item-option-selected");
-      const altOption = within(listbox).getByLabelText(optionText);
-      expect(altOption).toBeDefined();
-      expect(altOption.getAttribute("aria-selected")).toBe("true");
-    });
+    await waitForSelection(optionText);
+    console.log("after click:", getSelection());
 
     // const optionValue = optionText === "🐱" ? "cat" : "dog";
     // expect(handleChange).toHaveBeenCalledWith(optionValue, {
@@ -72,32 +101,30 @@ const resources = {
     // Close list
     //
     userEvent.click(select);
+    await waitForListClosed();
+    console.log("after hide-list:", getSelection());
 
     //
     // Return selection
     //
-    screen.debug(listbox);
-    const options = within(listbox).getAllByRole("option");
-    const names = [];
-    for (let option of options) {
-      if (option.getAttribute("aria-selected") === "true") {
-        names.push(option.getAttribute("aria-label"));
-      }
-    }
-
-    return names;
+    return getSelection();
   },
 };
 
-const { renderSelect, waitForListOpen, clickOption, getSelectionByClickingOption } = resources;
+const {
+  renderSelect,
+  waitForListOpen,
+  waitForListClosed,
+  waitForSelection,
+  getSelection,
+  getSelectionByClickingOption,
+} = resources;
 
 describe("<Select />", () => {
   it("should return proper selection after clicking option", async () => {
     const { container } = renderSelect();
 
-    let names;
-    names = await getSelectionByClickingOption("🐱");
-    // names = await getSelectionByClickingOption("🐶");
-    expect(names).toEqual(["🐱"]);
+    expect(await getSelectionByClickingOption("🐱")).toEqual(["🐱"]);
+    // expect(await getSelectionByClickingOption("🐶")).toEqual(["🐱", "🐶"]); // BROKEN
   });
 });
