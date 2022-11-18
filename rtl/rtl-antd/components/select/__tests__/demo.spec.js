@@ -8,7 +8,7 @@ const options = [
 ];
 
 const handleChange = (a, b) => {
-  console.log("a,b: ", a, b);
+  // console.log("a,b: ", a, b);
 };
 
 const resources = {
@@ -80,16 +80,13 @@ const resources = {
     const select = screen.getByRole("combobox");
     userEvent.click(select);
     await waitForListOpen();
-    console.log("before click:", getSelection());
 
     //
     // Click on option
     //
     const option = screen.getByText(optionText);
-    console.log("clicking on: ", optionText);
     userEvent.click(option);
     await waitForSelection(optionText);
-    console.log("after click:", getSelection());
 
     // const optionValue = optionText === "🐱" ? "cat" : "dog";
     // expect(handleChange).toHaveBeenCalledWith(optionValue, {
@@ -102,7 +99,6 @@ const resources = {
     //
     userEvent.click(select);
     await waitForListClosed();
-    console.log("after hide-list:", getSelection());
 
     //
     // Return selection
