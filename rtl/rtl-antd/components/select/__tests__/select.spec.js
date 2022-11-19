@@ -21,6 +21,7 @@ describe("<Select />", () => {
       expect(option1.getAttribute("title")).toBe("🐱");
       expect(options2.getAttribute("aria-selected")).toBe("false");
       expect(options2.getAttribute("title")).toBe("🐶");
+      expect(screen.getByTestId("selection")).toHaveTextContent(`["🐱"]`);
     });
 
     userEvent.click(option2);
@@ -31,6 +32,7 @@ describe("<Select />", () => {
       expect(option1.getAttribute("title")).toBe("🐱");
       expect(options2.getAttribute("aria-selected")).toBe("true");
       expect(options2.getAttribute("title")).toBe("🐶");
+      expect(screen.getByTestId("selection")).toHaveTextContent(`["🐱","🐶"]`);
     });
   });
 });
