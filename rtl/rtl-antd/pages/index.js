@@ -1,6 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
 
+const styles = {
+  main: { width: "50%", margin: "50px auto" },
+};
+
 export default function Home() {
   return (
     <div>
@@ -10,14 +14,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main style={styles.main}>
         <h1>Testing AntD with RTL</h1>
 
         <ul>
           <li>
-            <Link>
-              <a href="/select">select</a>
-            </Link>
+            <Link href="/select">select</Link>
           </li>
         </ul>
       </main>
