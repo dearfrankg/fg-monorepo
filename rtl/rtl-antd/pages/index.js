@@ -18,7 +18,7 @@ export default function Home() {
         <h1>Testing AntD with RTL</h1>
 
         <ul>
-          {["select", "message"].map((component, i) => (
+          {["select", "message", "msw"].map((component, i) => (
             <li key={i}>
               <Link href={`${component}`}>{component}</Link>
             </li>
