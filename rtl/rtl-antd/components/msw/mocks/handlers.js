@@ -10,8 +10,16 @@ export const api = {
     return res(ctx.status(200), ctx.json(mock.getFolders2));
   }),
 
+  getFoldersError: rest.get("http://localhost:4000/api/get-folders", (req, res, ctx) => {
+    return res(ctx.status(500), ctx.json({ message: "http error" }));
+  }),
+
   createFolder: rest.get("http://localhost:4000/api/create-folder/d", (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(mock.createFolder));
+  }),
+
+  createFolderError: rest.get("http://localhost:4000/api/create-folder/d", (req, res, ctx) => {
+    return res(ctx.status(500), ctx.json({ message: "http error" }));
   }),
 
   //   catchUnhandledRoute: () => {

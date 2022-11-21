@@ -14,7 +14,7 @@ describe("msw (mock service worker)", () => {
 
   */
 
-  it("should chain distinct responses from a single route using server.use", async () => {
+  it("should create folder using distinct responses on subsequent calls to api", async () => {
     render(<DemoMsw />);
 
     expect(screen.getByText(/loading/i));
@@ -30,5 +30,22 @@ describe("msw (mock service worker)", () => {
       expect(message).toHaveTextContent(/folder successfully created/i);
       expect(screen.getByTestId("folder-list")).toHaveTextContent("a,b,c,d");
     });
+  });
+
+  it("when cannot access get-folders api - should error appropriately", async () => {
+    server.use(api.getFoldersError);
+
+    render(<DemoMsw />);
+    expect(screen.getByText(/loading/i));
+    expect(await screen.findByRole("alert")).toHaveTextContent("Oops, could not get folders");
+  });
+
+  it("when cannot access create-folder api - should error appropriately", async () => {
+    server.use(api.createFolderError);
+
+    render(<DemoMsw />);
+    expect(screen.getByText(/loading/i));
+    userEvent.click(screen.getByRole("button"));
+    expect(await screen.findByRole("alert")).toHaveTextContent("Oops, could not create folder");
   });
 });
