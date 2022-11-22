@@ -5,14 +5,14 @@ import "./App.css";
 function App() {
   const [todos, setTodos] = useState([]);
   const [error, setError] = useState();
+
   useEffect(() => {
     getTodos()
-      .then((res) => {
-        const { data: todos } = res;
+      .then((todos) => {
         setTodos(todos);
       })
       .catch((err) => {
-        setError(err.response.data.message);
+        setError(err.message);
       });
   }, []);
 
