@@ -1,39 +1,45 @@
 import Head from "next/head";
 
 <Head>
-  <title>MONOREPO-RTL</title>
-  <script>foo = 55</script>
+  <title>fg-monorepo</title>
 </Head>
 
-# MONOREPO-RTL
-
-```js
-const foo = 55;
-```
+# FG-MONOREPO
 
 ## INTRO
 
-**Manage all projects related to react testing library using the turborepo monorepo manager.**
+**Turborepo monorepo manager allows me to manage all my repos in one place**
 
-| <div style={{ width: 50 }} /> | project                        | description                                                 |
-| ----------------------------- | :----------------------------- | :---------------------------------------------------------- |
-|                               | [docs]                         | document this monorepo. uses next + mdx. [mdx docs][how-to] |
-|                               | [rtl-examples]                 | components collection with tests                            |
-|                               | [rtl-ninja]                    | todo app with api and rtl tests                             |
-|                               | [rtl-taskhero]                 | todo app with api and rtl tests                             |
-|                               | <div style={{ width: 170 }} /> |                                                             |
+## REPO HEIRARCHY
 
-[docs]: http://localhost:3000
-[rtl-examples]: http://localhost:3001
-[rtl-ninja]: http://localhost:3002
-[rtl-taskhero]: http://localhost:3003
-[how-to]: https://stackoverflow.com/questions/71864146/using-remark-and-rehype-plugins-with-mdx-in-next-js-with-next-mdx
+- The top level folders are categories
+- Folders at the second level are workspaces (a complete next app for example)
+- The diagram below does not show every workspace
+
+```js
+- apps
+  -- docs
+
+- packages
+  -- eslint
+  -- typescript
+  -- ui (shared components)
+
+- react-concepts
+  -- react-keys
+
+- react-querying
+  -- swr related (SWR is a React Hooks library for data fetching.)
+
+- react-testing
+  -- react testing library related
+```
 
 <br />
 
 ## COMMANDS FOR ALL WORKSPACES
 
-- <Code>yarn dev</Code> run all workspaces in dev mode
+- <Code>yarn dev</Code> start all workspaces in dev mode
 - <Code>yarn start</Code> start all workspaces in production mode
 - <Code>yarn build</Code> build all workspaces
 - <Code>yarn lint</Code> lint all workspaces
@@ -41,5 +47,14 @@ const foo = 55;
 
 ## COMMANDS FOR SINGLE WORKSPACES
 
-- <Code>yarn workspace -name- dev</Code> run a single workspace in dev mode
-- <Code>yarn workspace -name- start</Code> start a single workspace in production mode
+- <Code>yarn dev --filter docs</Code> start the docs workspaces in dev mode
+- <Code>yarn start --filter docs</Code> start the docs workspaces in production mode
+- <Code>yarn build --filter docs</Code> build the docs workspaces
+- <Code>yarn lint --filter docs</Code> lint the docs workspaces
+- <Code>yarn test --filter docs</Code> test the docs workspaces
+
+## ADDING NODE PACKAGES TO YOUR WORKSPACE
+
+- <Code>yarn workspace docs add lodash</Code> add the lodash package to the docs workspace
+
+<div style={{ height: 500 }} />
