@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "workspaces": [
-    "react-concepts/*",
-    "rtl/*",
+    "apps/*",
     "packages/*",
-    "swr/*"
+    "react-concepts/*",
+    "react-querying/*",
+    "react-testing/*"
   ],
   "scripts": {
     "build": "turbo run build",
