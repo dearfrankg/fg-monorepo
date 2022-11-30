@@ -5,8 +5,9 @@
   "workspaces": [
     "apps/*",
     "packages/*",
+    "react-applied/*",
     "react-concepts/*",
-    "react-querying/*",
+    "react-data-fetching/*",
     "react-testing/*"
   ],
   "scripts": {
