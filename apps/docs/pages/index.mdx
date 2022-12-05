@@ -57,4 +57,13 @@ import Head from "next/head";
 
 - <Code>yarn workspace docs add lodash</Code> add the lodash package to the docs workspace
 
+## ISSUE WITH NEXT_AUTH PACKAGE
+
+To make it work
+
+- remove <Code>yarn.lock</Code>
+- remove <Code>node_modules</Code> from <Code>next-auth</Code> and <Code>root</Code>
+- install modules using an npm version 7+ <Code>npm i --legacy-peer-deps</Code>
+- launch next-auth app <Code>npm run dev -w next-auth</Code>
+
 <div style={{ height: 500 }} />
