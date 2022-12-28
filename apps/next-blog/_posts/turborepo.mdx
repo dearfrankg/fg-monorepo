@@ -1,0 +1,120 @@
+---
+date: "2022-12-27"
+thumbnail: /assets/coder-cartoon.jpg
+title: Turborepo in 2 Minutes
+description: A quick guide to using Turborepo
+stacks: ["Node", "Yarn", "Git"]
+---
+
+<Stacks />
+
+                                        packages/shared
+                                        lint
+                                        build
+                                        test
+
+
+                apps/web                                        apps/docs
+                lint                                            lint
+                build                                           build
+                test                                            test
+
+- Jared Palmer (Founder, Turborepo)
+- Turborepo sponsored by Vercel
+- turbo understand your monorepo
+- understand that packages/shared needs to be built before the others
+- running using normal-task-runner runs serially
+- running using turbo schedules for maximum concurrency
+- turbo never repeats work because of its cache
+- turbo even better in multiplayer mode via cloud cache
+
+## CREATING A MONOREPO
+
+REFERENCE
+
+- [turbo getting started](https://turborepo.org/docs)
+- multiple projects in one repo
+- designed to be incrementally adopted
+
+CREATE A MONOREPO
+
+- `npx create-turbo@latest` // create a sample turborepo
+- use any package manager
+- creates 5 shared packages
+
+OUTPUT
+
+```text
+>>> Creating a new turborepo with the following:
+ - apps/web: Next.js with TypeScript
+ - apps/docs: Next.js with TypeScript
+ - packages/ui: Shared React component library
+ - packages/eslint-config-custom: Shared configuration (ESLint)
+ - packages/tsconfig: Shared TypeScript `tsconfig.json`
+```
+
+## EXPLORE SHARING PACKAGES
+
+```text
+
+
+EXPORTING FROM PACKAGES/UI
+
+// packages/ui/package.json --
+{
+  "main": "./index.tsx", // js
+  "types": "./index.tsx" // types
+}
+
+IMPORTING INTO APPS/WEB
+
+apps/web/package.json
+{
+  "dependencies": {
+    "ui": "*"
+  }
+}
+
+```
+
+> ESLINT IS A SPECIAL CASE: `eslint-config-custom` required name to share eslint package
+
+## PACKAGE DEPENDENCIES
+
+- web - depends on ui, tsconfig and eslint-config-custom
+- docs - depends on ui, tsconfig and eslint-config-custom
+- ui - depends on tsconfig and eslint-config-custom
+- tsconfig - no dependencies
+- eslint-config-custom - no dependencies
+
+> The package manager you chose (npm, pnpm or yarn) manages dependencies.
+
+## TURBO.JSON
+
+```json
+// turbo.json
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    }
+  }
+}
+```
+
+- turbo commands must exist in `turbo.json`
+- We've registered 3 tasks `build`, `lint`, `dev`
+- now you can run them as `yarn dev`, `yarn build`, `yarn lint`,
+
+## STARTING APPS
+
+- `yarn dev --filter <app-name>`
+- `yarn dev --filter next-blog`
