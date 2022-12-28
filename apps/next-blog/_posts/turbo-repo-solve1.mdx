@@ -1,0 +1,50 @@
+---
+date: "2021-11-25"
+thumbnail: /assets/coder.webp
+title: Turborepo Solve1
+description: When I move my react project into turborepo it throws a Duplicate React error
+prerequisites: ["Using turborepo to store many react repos"]
+stacks: ["Next.js", "React"]
+---
+
+<Prerequisites />
+
+In a **monorepo**, a single code repository contains multiple related projects. **Monorepos** can be useful for managing large, complex codebases, as they allow teams to work on multiple projects within the same repository and share code between projects more easily.
+
+In a **monorepo** managed with **yarn**, **resolutions** can affect how packages are installed and managed within the repository. Because all of the projects within the **monorepo** share the same **yarn.lock** file, the **resolutions** of one project can potentially impact the versions of packages installed in other projects.
+
+For example, suppose a **monorepo** contains two projects, Project A and Project B, and both projects depend on the same package, **React**. If Project A specifies a range of acceptable versions for **React** that includes a newer version than the version specified by Project B, **yarn** may resolve the package differently for the two projects. This could lead to conflicts if the newer version of the package is not compatible with the version required by Project B.
+
+To avoid such conflicts, it is important to carefully manage the versions of packages used in a monorepo and ensure that all projects are compatible with the versions of packages installed in the repository. One way to do this is to use **yarn workspaces**, which allow you to define a set of packages within a **monorepo** that should be treated as a single unit for the purposes of package resolution. With **yarn workspaces**, you can specify a single set of package versions that will be used across all projects in the workspace, helping to ensure that all of the projects in the monorepo are using compatible versions of packages.
+
+In my **monorepo** project which is a **yarn workspace** I can specify the version of **React** to use with **resolutions**. Inside the **package.json** file, I needed to move the **react** and **react-dom** packages from **dependencies** to **resolutions**. After I did that I removed two **node_modules** folders. One from the **monorepo root** and one from **my project**. I then ran the command **yarn install --force**. I then started my project app with the command **yarn dev --filter next-blog**.
+
+My project's `package.json` file:
+
+```json
+{
+...
+  "dependencies": {
+    "@tailwindcss/typography": "^0.4.1",
+    "autoprefixer": "^10.4.0",
+    "gray-matter": "^4.0.3",
+    "next": "12.0.4",
+    "next-mdx-remote": "^3.0.7",
+    "postcss": "^8.4.1",
+    "tailwindcss": "^2.2.19"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.10",
+    "@types/react": "17.0.37",
+    "eslint": "7.32.0",
+    "eslint-config-next": "12.0.4",
+    "typescript": "4.5.2"
+  },
+  "resolutions": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  }
+}
+```
+
+It worked! and all is well in dev-ville.

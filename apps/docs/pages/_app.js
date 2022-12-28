@@ -35,7 +35,9 @@ const components = {
 export default function MyApp({ Component, pageProps }) {
   return (
     <MDXProvider components={components}>
-      <Component {...pageProps} />
+      <div style={{ margin: "0 auto", width: 700, height: "100vh" }}>
+        <Component {...pageProps} />
+      </div>
     </MDXProvider>
   );
 }
