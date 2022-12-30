@@ -1,0 +1,287 @@
+---
+date: "2022-12-29"
+thumbnail: /assets/coder-cartoon.jpg
+title: Avoid these Typescript Mistakes
+description: A list of common typescript mistakes and how to fix them.
+stacks: ["Typescript"]
+---
+
+## Source
+
+- source: xxx
+
+## Mistake 1: Using the "any" type
+
+Solution:
+
+```ts
+// Bad
+let x: any = 4;
+x = "hello";
+
+// Good
+let y: unknown = 4;
+let z: string = y; // This will cause a type error because y is not guaranteed to be a string
+```
+
+## Mistake 2: Not properly handling type errors
+
+Solution:
+
+```ts
+// Bad
+function add(x: number, y: number) {
+  return x + y;
+}
+
+console.log(add(1, "2")); // This will cause a runtime error
+
+// Good
+function add(x: number, y: number) {
+  if (typeof x !== "number" || typeof y !== "number") {
+    throw new Error("Invalid arguments");
+  }
+  return x + y;
+}
+
+console.log(add(1, 2)); // Outputs 3
+console.log(add(1, "2")); // Throws an error
+```
+
+## Mistake 3: Not using the "never" type for functions that throw errors or never return
+
+Solution:
+
+```ts
+// Bad
+function getUserById(id: number): any {
+  const user = getUserFromDatabase(id);
+  if (!user) {
+    throw new Error("User not found");
+  }
+  return user;
+}
+
+// Good
+function getUserById(id: number): never | User {
+  const user = getUserFromDatabase(id);
+  if (!user) {
+    throw new Error("User not found");
+  }
+  return user;
+}
+```
+
+## Mistake 4: Not using the "null" and "undefined" types when appropriate
+
+Solution:
+
+```ts
+// Bad
+let x: number = null;
+
+// Good
+let x: number | null = null;
+
+// Alternatively, you can use the "strictNullChecks" compiler option to disallow assigning null to non-nullable types
+```
+
+## Mistake 5: Not using type aliases and interfaces to define complex types
+
+Solution:
+
+```ts
+// Bad
+function createUser(
+  name: string,
+  age: number,
+  address: { street: string; city: string; zipCode: string }
+) {
+  // ...
+}
+
+// Good
+type Address = {
+  street: string;
+  city: string;
+  zipCode: string;
+};
+
+interface User {
+  name: string;
+  age: number;
+  address: Address;
+}
+
+function createUser(user: User) {
+  // ...
+}
+```
+
+## Mistake 6: Not using type guards to narrow types
+
+Solution:
+
+```ts
+// Bad
+function getUserName(user: any): string {
+  return user.name;
+}
+
+// Good
+function isUser(user: any): user is User {
+  return typeof user.name === "string";
+}
+
+function getUserName(user: any): string | undefined {
+  if (isUser(user)) {
+    return user.name;
+  }
+  return undefined;
+}
+```
+
+## Mistake 7: Not using type assertions to override type inference
+
+Solution:
+
+```ts
+// Bad
+function getUserName(user: any): string {
+  return user.name;
+}
+
+// Good
+function getUserName(user: any): string {
+  return user.name as string;
+}
+```
+
+## Mistake 8: Not using enums to define a set of related constants
+
+Solution:
+
+```ts
+// Bad
+const RED = "red";
+const GREEN = "green";
+const BLUE = "blue";
+
+function getColor(color: string): string {
+  if (color === "red") {
+    return RED;
+  } else if (color === "green") {
+    return GREEN;
+  } else if (color === "blue") {
+    return BLUE;
+  }
+  throw new Error("Invalid color");
+}
+
+// Good
+enum Color {
+  RED = "red",
+  GREEN = "green",
+  BLUE = "blue",
+}
+
+function getColor(color: Color): Color {
+  return color;
+}
+```
+
+## Mistake 9: Not using type alias and union types to define a set of related types
+
+Solution:
+
+```ts
+// Bad
+function isNumber(x: any): boolean {
+  return typeof x === "number";
+}
+
+function isString(x: any): boolean {
+  return typeof x === "string";
+}
+
+// Good
+type NumberOrString = number | string;
+
+function isNumberOrString(x: any): x is NumberOrString {
+  return typeof x === "number" || typeof x === "string";
+}
+```
+
+## Mistake 10: Not using type parameter constraints to enforce the relationship between types
+
+Solution:
+
+```ts
+// Bad
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+  return obj[key];
+}
+
+const obj = { a: 1, b: 2 };
+console.log(getProperty(obj, "a")); // Outputs 1
+console.log(getProperty(obj, "c")); // Outputs undefined
+
+// Good
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+
+const obj = { a: 1, b: 2 };
+console.log(getProperty(obj, "a")); // Outputs 1
+console.log(getProperty(obj, "c")); // Throws an error
+```
+
+## Mistake 11: Not using type inference to automatically infer types
+
+Solution:
+
+```ts
+// Bad
+const x = 3;
+let y: number = x;
+
+// Good
+let x = 3;
+let y = x;
+
+// Type inference also works with function return types
+function getNumber(): number {
+  return 3;
+}
+
+let z = getNumber();
+```
+
+## Mistake 12: Not using type assertions to override type inference
+
+Solution:
+
+```ts
+// Bad
+function getLength(x: any): number {
+  return x.length;
+}
+
+// Good
+function getLength(x: any): number {
+  return x.length as number;
+}
+```
+
+## Mistake 13: Not using "strict" mode to enable additional type checking
+
+Solution:
+
+```ts
+// In your tsconfig.json file
+{
+  "compilerOptions": {
+    "strict": true
+  }
+}
+```
