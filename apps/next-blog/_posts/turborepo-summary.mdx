@@ -1,0 +1,120 @@
+---
+date: "2022-12-30"
+thumbnail: /assets/coder-cartoon.jpg
+title: Turborepo Summary
+description: A summary of turborepo in my own words
+stacks: ["Turborepo"]
+---
+
+## INTRO
+
+Turborepo is a repository for many projects.
+
+## INSTALLING TURBOREPO
+
+- `npx create-turbo@latest` -- creates a folder with 5 projects
+
+CONTENTS
+
+| project                | description                                                | depends on                         |
+| ---------------------- | ---------------------------------------------------------- | ---------------------------------- |
+| apps/web               | a full nextjs/typescript app                               | shared config files and components |
+| apps/docs              | a full nextjs/typescript app                               | shared config files and components |
+| packages/ui            | shared react components files and react/eslint/ts packages | shared config files                |
+| packages/eslint-config | shared configuration files and eslint/ts packages          | none                               |
+| packages/tsconfig      | shared configuration files                                 | none                               |
+
+## CONFIGURING TURBOREPO
+
+- `yarn` is a package manager for node it can manage multiple projects
+- `yarn` will be used to run turborepo commands
+- `yarn` projects live under `yarn workspaces`
+
+CONFIGURE YARN WORKSPACES
+
+- `yarn workspaces` represent your projects
+- edit `package.json` to configure where the workspaces live
+
+```json
+// package.json at the root level
+  "workspaces": [
+    "apps/*",           // contains projects apps/docs, app/web
+    "packages/*",       // contains projects packages/ui, packages/eslint-config, packages/tsconfig
+    "demo/*"            // contains my new project demo/my-demo
+  ],
+```
+
+CONFIGURING PROJECTS
+
+- each project's `package.json` file must contain these three properties.
+
+```json
+// package.json at the project level
+  "name": "next-blog",      // project name
+  "version": "0.0.0",       // project version
+  "private": true,          // project privacy
+```
+
+CONFIGURING TURBOREPO
+
+- turbo commands must exist in `turbo.json`
+- we have configured 3 tasks build, lint, dev
+- running commands for one project: `yarn dev --filter docs` -- start the `docs` project
+- running commands for all projects: `yarn build` -- build all projects
+
+NOTES
+
+> In order for you to able to run a turborepo task on your project, that task must exist in the project's `package.json` file under `scripts`. In this case our `web` and `docs` projects are `nextjs` projects that have a `dev` command under `scripts`.
+
+```
+// turbo.json
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    }
+  }
+}
+```
+
+## SHARING BETWEEN PACKAGES
+
+```
+PACKAGES/UI TO PREPARE TO EXPORT
+
+// packages/ui/package.json
+{
+    "main": "./index.tsx", // js        // prepare to export
+    "types": "./index.tsx" // types     // prepare to export
+}
+
+APPS/WEB TO INCLUDE DEPENDENCY
+
+// apps/web/package.json
+{
+"dependencies": {
+    "ui": "\*"                          // mark as dependency
+}
+}
+
+APPS/WEB TO IMPORT COMPONENT
+
+// apps/web/pages/index.tsx
+import { Button } from "ui";            // import component
+```
+
+## WHEN ADDING A PROJECT
+
+- remove the `git-repo`, `lock-files`, `build-files`, `node-modules`
+- insure the correct version of react is used: edit `package.json` to move `react` and `react-dom` from `dependencies` to `resolutions`.
+- confirm your project's `package.json` has the three required properties: `name`, `version`, `private`
+- install packages from root level: `yarn install`
+- run the project to insure it works

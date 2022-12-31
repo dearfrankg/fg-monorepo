@@ -11,6 +11,10 @@ import Prerequisites from "../../components/Prerequisites";
 import { ParsedUrlQuery } from "querystring";
 import Stacks from "../../components/Stacks";
 
+import dayjs from "dayjs";
+import relativeTIme from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTIme);
+
 // props type
 type Props = {
   source: MDXRemoteSerializeResult;
@@ -36,11 +40,12 @@ const PostPage: React.FC<Props> = ({ source, frontMatter }: Props) => {
 
   return (
     <div>
-      <article className="prose prose-green">
+      <article className="max-w-4xl prose prose-green">
         <div className="mb-4">
           <Thumbnail title={frontMatter.title} src={frontMatter.thumbnail} />
         </div>
 
+        <strong>{dayjs(frontMatter.date).fromNow()}</strong>
         <h1>{frontMatter.title}</h1>
 
         <p>{frontMatter.description}</p>

@@ -1,0 +1,249 @@
+---
+date: "2022-12-30"
+thumbnail: /assets/coder-cartoon.jpg
+title: Typescript Tutorial
+description: A beginner tutorial
+stacks: ["Typescript", "React"]
+---
+
+## Source
+
+- source: https://ts.chibicode.com/todo/
+
+## INTRO
+
+Learn TypeScript by building a todo app
+
+- Section 1: Types, Read-only Properties, and Mapped Types
+- Section 2: Array Types, Literal Types, and Intersection Types
+- Section 3: Union Types and Optional Properties
+
+## Section 1: Types, Read-only Properties, and Mapped Types
+
+Let's see how typescript can help us write a `toggleTodo` function.
+
+TYPES
+
+```ts
+/*
+ TYPES CATCH ERRORS
+  - prop missing
+  - prop wrong type
+*/
+
+type Todo = {
+  id: number;
+  text: string;
+  done: boolean;
+};
+
+const foo: Todo = {
+  id: 1,
+  text: "…",
+  done: true,
+};
+
+// ERROR: missing id prop
+const toggeTodo = (todo: Todo): Todo => {
+  return {
+    text: "...",
+    done: !todo.done,
+  };
+};
+
+// ERROR: id prop wrong type
+const toggeTodo = (todo: Todo): Todo => {
+  return {
+    id: "1",
+    text: "...",
+    done: !todo.done,
+  };
+};
+```
+
+READONLY PROPS
+
+```ts
+/*
+ READONLY PROPS
+  - prevents modification
+*/
+
+// readonly keyword
+type Todo = {
+  readonly id: number;
+  readonly text: string;
+  readonly done: boolean;
+};
+
+// ERROR: cannot modify readonly type
+const toggeTodo = (todo: Todo): Todo => {
+  todo.done = !todo.done;
+  return todo;
+};
+```
+
+MAPPED TYPES
+
+```ts
+/*
+ MAPPED TYPES
+  - simpler to implement
+*/
+
+// map types style1
+type Todo = Readonly<{
+  id: number;
+  text: string;
+  done: boolean;
+}>;
+
+// map types style2
+type Todo = {
+  id: number;
+  text: string;
+  done: boolean;
+};
+type ReadonlyTodo = Readonly<Todo>;
+```
+
+- keywords like `Readonly<>` are mapped types - they are kind of like functions
+- other mapped types: `Required<>` and `Partial<>`
+- you can create your own mapped types
+
+SUMMARY
+
+Types are like light-weight, automatic unit tests
+
+- Constrain fn IO to the correct type
+- Use the `readonly` keyword to prevent property modification
+- Use mapped types to convert one type to another type
+
+## Section 2: Array Types, Literal Types, and Intersection Types
+
+Let's see how typescript can help us write a `completeAll` function.
+
+```ts
+/*
+  - array types simply have square brackets at the end -- Todo[]
+  - array types can be made readonly using the readonly keyword -- readonly Todo[]
+  - literal types allow us to use values instead of types -- { done: true }
+  - intersection types can prevent duplicate code -- Todo & { readonly done: true; };
+  - intersection types allow you to use the & operator to combine types
+*/
+
+type Todo = Readonly<{
+  id: number;
+  text: string;
+  done: boolean;
+}>;
+
+type CompletedTodo = Todo & {
+  readonly done: true;
+};
+
+function completeAll(todos: readonly Todo[]): CompletedTodo[] {
+  // After declaring todos as readonly Todo[],
+  // the following code WILL NOT compile:
+
+  // Compile error - modifies the array
+  todos[0] = { id: 1, text: "…", done: true };
+
+  // Compile error - push() modifies the array
+  todos.push({ id: 1, text: "…", done: true });
+
+  // working code
+  return todos.map((todo) => ({
+    ...todo,
+    done: true,
+  }));
+}
+```
+
+SUMMARY
+
+TypeScript can handle arrays and exact values
+
+- specify an array by adding `[]` and set an array as `readonly`
+- literal types allow us to use values instead of types -- { done: true }
+- intersection types can prevent duplicate code -- Todo & { readonly done: true; };
+
+## Section 3: Union Types and Optional Properties
+
+Let’s add a new feature to our todo app: an optional Place tags.
+
+```text
+// Let's examine the data
+
+// the place property determines the place tag
+place: 'home'
+
+// custom places will be like so:
+place: { custom: 'Gym' }
+
+// The place property can also be missing if there's no place tag.
+```
+
+To implement place tags, we can use a TypeScript feature called `union types`.
+
+```ts
+/*
+- use the | operator to create a union type
+- use the ? operator to make the property optional
+*/
+
+// first let's create a Place type
+type Place = "home" | "work" | { custom: string };
+
+// Assign Place to Todo’s place property
+type Todo = Readonly<{
+  id: number;
+  text: string;
+  done: boolean;
+  place?: Place;
+}>;
+```
+
+Implementing placeToString()
+
+```ts
+/*
+Input should be a Place. Example: 'work'.
+
+Return value should be a string (with an emoji)
+that will be used for the label UI. Example: '🧳 Work'.
+*/
+
+function placeToString(place: Place): string {
+  // ERROR: custom does not exist on type
+  // typescipt knows that in the else clause
+  // it can be work or custom and work has no custom prop
+  function placeToString(place: Place): string {
+    if (place === "home") {
+      return "🏠 Home";
+    } else {
+      return "📍 " + place.custom;
+    }
+  }
+
+  // working
+  function placeToString(place: Place): string {
+    if (place === "home") {
+      return "🏠 Home";
+    } else if (place === "work") {
+      return "🧳 Work";
+    } else {
+      return "📍 " + place.custom;
+    }
+  }
+}
+```
+
+SUMMARY
+
+Union types are powerful
+
+- use the | operator to create a union type
+- use the ? operator to make the property optional
+- union types are powerful when combined with if/else
+- There are other powerful features of union types (discriminated unions, combining them with mapped types, etc) which I won’t cover here
