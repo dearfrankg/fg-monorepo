@@ -92,23 +92,23 @@ PACKAGES/UI TO PREPARE TO EXPORT
 
 // packages/ui/package.json
 {
-    "main": "./index.tsx", // js        // prepare to export
-    "types": "./index.tsx" // types     // prepare to export
+  "main": "./index.tsx", // js        // prepare to export
+  "types": "./index.tsx" // types     // prepare to export
 }
 
 APPS/WEB TO INCLUDE DEPENDENCY
 
 // apps/web/package.json
 {
-"dependencies": {
-    "ui": "\*"                          // mark as dependency
-}
+  "dependencies": {
+      "ui": "\*"                      // mark as dependency
+  }
 }
 
 APPS/WEB TO IMPORT COMPONENT
 
 // apps/web/pages/index.tsx
-import { Button } from "ui";            // import component
+import { Button } from "ui";          // import component
 ```
 
 ## WHEN ADDING A PROJECT
