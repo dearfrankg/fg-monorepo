@@ -6,7 +6,6 @@ import { MdxComponentsProvider } from "../context/mdxContext";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <MdxComponentsProvider>
-      {" "}
       <Layout>
         <Component {...pageProps} />
       </Layout>
