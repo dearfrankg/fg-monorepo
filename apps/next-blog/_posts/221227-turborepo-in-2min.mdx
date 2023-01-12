@@ -55,26 +55,25 @@ OUTPUT
 
 ## EXPLORE SHARING PACKAGES
 
-```text
-
-
 EXPORTING FROM PACKAGES/UI
 
+```json
 // packages/ui/package.json --
 {
   "main": "./index.tsx", // js
   "types": "./index.tsx" // types
 }
+```
 
 IMPORTING INTO APPS/WEB
 
-apps/web/package.json
+```json
+// apps/web/package.json
 {
   "dependencies": {
     "ui": "*"
   }
 }
-
 ```
 
 > ESLINT IS A SPECIAL CASE: `eslint-config-custom` required name to share eslint package

@@ -35,8 +35,7 @@ CONFIGURE YARN WORKSPACES
 - `yarn workspaces` represent your projects
 - edit `package.json` to configure where the workspaces live
 
-```json
-// package.json at the root level
+```json package.json
   "workspaces": [
     "apps/*",           // contains projects apps/docs, app/web
     "packages/*",       // contains projects packages/ui, packages/eslint-config, packages/tsconfig
@@ -66,7 +65,7 @@ NOTES
 
 > In order for you to able to run a turborepo task on your project, that task must exist in the project's `package.json` file under `scripts`. In this case our `web` and `docs` projects are `nextjs` projects that have a `dev` command under `scripts`.
 
-```
+```json
 // turbo.json
 {
   "$schema": "https://turborepo.org/schema.json",
@@ -87,28 +86,32 @@ NOTES
 
 ## SHARING BETWEEN PACKAGES
 
-```
 PACKAGES/UI TO PREPARE TO EXPORT
 
+```ts
 // packages/ui/package.json
 {
   "main": "./index.tsx", // js        // prepare to export
   "types": "./index.tsx" // types     // prepare to export
 }
+```
 
 APPS/WEB TO INCLUDE DEPENDENCY
 
+```ts
 // apps/web/package.json
 {
   "dependencies": {
-      "ui": "\*"                      // mark as dependency
+    "ui": "\*" // mark as dependency
   }
 }
+```
 
 APPS/WEB TO IMPORT COMPONENT
 
+```ts
 // apps/web/pages/index.tsx
-import { Button } from "ui";          // import component
+import { Button } from "ui"; // import component
 ```
 
 ## WHEN ADDING A PROJECT

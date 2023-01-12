@@ -24,6 +24,7 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
               </Link>
             </h2>
 
+            <p>{post.date}</p>
             <p>{post.description}</p>
           </div>
         ))}
