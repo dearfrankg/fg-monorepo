@@ -2,18 +2,40 @@ import { serialize } from "next-mdx-remote/serialize";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { useEffect } from "react";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-
+//---
+import { IPost } from "../../types/post";
 import { useMdxComponentsContext } from "../../context/mdxContext";
 import Thumbnail from "../../components/Thumbnail";
-import { IPost } from "../../types/post";
-import { getPost, getAllPosts } from "../../utils/mdxUtils";
 import Prerequisites from "../../components/Prerequisites";
-import { ParsedUrlQuery } from "querystring";
 import Stacks from "../../components/Stacks";
-
+import { ParsedUrlQuery } from "querystring";
+import { getPost, getAllPosts } from "../../utils/mdxUtils";
+//---
+import Highlight, { defaultProps } from "prism-react-renderer";
+//---
 import dayjs from "dayjs";
 import relativeTIme from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTIme);
+
+const code = ({ children, className }: { children: any; className: any }) => {
+  const language = !!className ? className.replace(/language-/, "") : "text";
+
+  return (
+    <Highlight {...defaultProps} code={children} language={language}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <pre className={className} style={{ ...style, padding: "20px" }}>
+          {tokens.map((line, i) => (
+            <div key={i} {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span key={key} {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </pre>
+      )}
+    </Highlight>
+  );
+};
 
 // props type
 type Props = {
@@ -23,6 +45,7 @@ type Props = {
 
 // components to render
 const components = {
+  code,
   Prerequisites,
   Stacks,
 };
