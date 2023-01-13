@@ -19,10 +19,10 @@ const Home: NextPage<Props> = ({ posts }: Props) => {
     const dataSource = posts.map((post, index) => {
       return {
         key: index.toString(),
-        date: <div style={{ whiteSpace: "nowrap" }}>{dayjs(post.date).fromNow()}</div>,
+        date: <div className="whitespace-nowrap">{dayjs(post.date).fromNow()}</div>,
         title: (
           <Link href={`/posts/${post.slug}`}>
-            <a>{post.title}</a>
+            <a className="whitespace-nowrap">{post.title}</a>
           </Link>
         ),
         description: post.description,
