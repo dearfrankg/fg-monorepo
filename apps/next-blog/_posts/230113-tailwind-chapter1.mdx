@@ -1,0 +1,209 @@
+---
+date: "2023-01-13"
+thumbnail: /assets/coder-cartoon.jpg
+title: Tailwind Chapter 1
+description: tailwind course
+---
+
+## SOURCE
+
+- https://www.youtube.com/watch?v=lCxcTsOHrjo&ab_channel=DaveGray
+
+## INTRO
+
+Tailwind CSS makes it quicker to write and maintain the code of your application. By using this
+utility-first framework, you don't have to write custom CSS to style your application. Instead, you
+can use utility classes to control the padding, margin, color, font, shadow, and more of your
+application.
+
+## PREREQUISITES
+
+- html
+- css
+- chrome
+- vs-code
+- vs-code-plugins: inline-fold, tailwind-css-intellisense, live-server
+- node
+
+## SETUP
+
+### CONFIGURE LIVE SERVER
+
+To configure live server to auto reload
+
+- open live-server plugin
+- click the gear
+- append `full server` and hit enter
+- click checkbox: `By Default....`
+
+### CONFIGURE TAILWINDCSS
+
+CREATE AND POPULATE CONFIG FILE
+
+configure tailwind to work on all html file under the build directory
+
+- `npx tailwindcss init` --- creates a tailwind config file
+- add `"./build/*.html"` into the content array
+
+```json
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./build/*.html"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+CREATE TREE
+
+- create missing folders and files in the following tree minus the `style.css` file
+
+```text
+├── build
+│   ├── css
+│   │   └── style.css
+│   └── index.html
+├── src
+│   └── input.css
+└── tailwind.config.js
+```
+
+POPULATE input.css
+
+- populate with the basic tailwind modules
+
+```css
+// ./src/input.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+POPULATE index.html
+
+- populate with basic html template using `!` `tab` in vs-code
+
+```html
+// index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+```
+
+DISABLE CSS WARNING
+
+- goto vscode settings
+- type `unknown`
+- click checkbox: `CSS lint unknown at rule`
+
+COMPILE CSS
+
+Compile our css file into our final css file
+
+- `npx tailwindcss -i ./src/input.css -o ./build/css/style.css` -- compile css
+- `npx tailwindcss -i ./src/input.css -o ./build/css/style.css --watch` -- compile css on file change
+
+INCLUDE FINAL CSS IN OUR HTML FILE
+
+add this line to the head section of the html file
+
+```html
+<link rel="stylesheet" href="css/style.css" />
+```
+
+## USING TAILWINDCSS
+
+Let's start with an emerald box
+
+```html
+<body>
+  <div class="bg-emerald-500 w-52 h-52 "></div>
+</body>
+```
+
+Change to an emerald circle
+
+```html
+<body>
+  <div class="bg-emerald-500 w-52 h-52 rounded-full"></div>
+</body>
+```
+
+Add a shadow
+
+```html
+<body>
+  <div class="bg-emerald-500 w-52 h-52 rounded-full shadow-2xl"></div>
+</body>
+```
+
+Center on the page
+
+```html
+<body class="min-h-screen grid place-content-center">
+  <div class="bg-emerald-500 w-52 h-52 rounded-full shadow-2xl"></div>
+</body>
+```
+
+Add an inner teal circle into the center
+
+```html
+<body class="min-h-screen grid place-content-center">
+  <div class="bg-emerald-500 w-52 h-52 rounded-full shadow-2xl grid place-content-center">
+    <div class="bg-teal-200 w-32 h-32 rounded-full "></div>
+  </div>
+</body>
+```
+
+Add an inner red circle into the center
+
+```html
+<body class="min-h-screen grid place-content-center">
+  <div class="bg-emerald-500 w-52 h-52 rounded-full shadow-2xl grid place-content-center">
+    <div class="bg-teal-200 w-32 h-32 rounded-full grid place-content-center">
+      <div class="bg-red-500 w-16 h-16 rounded-full"></div>
+    </div>
+  </div>
+</body>
+```
+
+Add a radial background color to the body
+
+Since tailwindcss does not support a radial backround we need to write some custom css
+
+```css
+// ./src/input.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.radial-blue {
+  background: radial-gradient(lightyellow, skyblue);
+}
+```
+
+Add a radial background color to the body
+
+```html
+<body class="min-h-screen grid place-content-center radial-blue">
+  <div class="bg-emerald-500 w-52 h-52 rounded-full shadow-2xl grid place-content-center">
+    <div class="bg-teal-200 w-32 h-32 rounded-full grid place-content-center">
+      <div class="bg-red-500 w-16 h-16 rounded-full"></div>
+    </div>
+  </div>
+</body>
+```
+
+## THE RESULT
+
+![target](/assets/tailwind.png)
