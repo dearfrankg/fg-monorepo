@@ -1,7 +1,7 @@
 import { useMdxComponentsContext } from "../context/mdxContext";
 
 const Stacks: React.FC = () => {
-  const stacks = useMdxComponentsContext().stacks;
+  const stacks = useMdxComponentsContext().stacks || [];
   return (
     <>
       <h2>Stacks</h2>
