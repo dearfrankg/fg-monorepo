@@ -1,0 +1,182 @@
+---
+date: "2023-01-17"
+thumbnail: /assets/coder-cartoon.jpg
+title: React & TypeScript
+description: TypeScript offers JavaScript developers a robust solution to writing bug-minimal code. It offers more types and stronger type-checking than JavaScript.
+---
+
+## SOURCE
+
+- https://www.youtube.com/watch?v=37PafxU_uzQ&ab_channel=MattPocock
+
+## SETUP
+
+PACKAGES
+
+- @types/node
+- @types/react
+- @types/react-dom
+- next
+- react
+- react-dom
+- typescript
+
+TS CONFIG
+
+```json
+...
+"jsx": "preserve" // preserve is the most up to date
+...
+```
+
+## COMPONENTS
+
+### NO PROPS
+
+- passing it a prop will error
+
+```ts
+const Component = () => <h1>Hello</h1>;
+```
+
+### USING PROPS WITH A TYPE
+
+- passing the wrong type will error
+
+```ts
+type ComponentProps = {
+  wow: boolean;
+};
+
+const Component = (props: ComponentProps) => <h1>Hello</h1>;
+```
+
+### USING PROPS WITH AN INTERFACE
+
+- passing the wrong type will error
+
+> When building a component library use interfaces so they can be extended
+
+```ts
+interface ComponentProps {
+  wow: boolean;
+}
+
+const Component = ({ wow }: { wow: boolean }) => <h1>Hello</h1>;
+```
+
+### USING PROPS WITH UNIONS
+
+- helps with autocomplete
+
+```ts
+interface ComponentProps {
+  wow: boolean;
+  variant: "primary" | "secondary";
+}
+
+const Component = ({ wow, variant }: ComponentProps) => <h1>Hello</h1>;
+```
+
+### USING PROPS WITH COLLECTIONS
+
+- helps with autocomplete
+
+```ts
+interface ComponentProps {
+  data: Array<{
+    id: string;
+  }>;
+}
+
+const Component = (props: ComponentProps) => {
+  console.log("props: ", props);
+  return <h1>Hello</h1>;
+};
+
+export default function Home() {
+  return <Component data={[{ id: "123" }]} />;
+}
+```
+
+### USING PROPS WITH FUNCTIONS
+
+- helps with autocomplete
+
+```ts
+interface ComponentProps {
+  onSuccess: (result: string) => void;
+}
+
+const Component = (props: ComponentProps) => {
+  props.onSuccess();
+  return <h1>Hello</h1>;
+};
+
+export default function Home() {
+  return (
+    <Component
+      onSuccess={(result) => {
+        console.log("success");
+      }}
+    />
+  );
+}
+```
+
+### USING PROPS WITH EVENT HANDLERS
+
+- helps with autocomplete
+
+```ts
+import { MouseEventHandler } from "react";
+
+interface ComponentProps {
+  onClick: MouseEventHandler;
+  onFocus: FocusEventHandler;
+  onBlur: FocusEventHandler;
+  onChange: FormEventHandler;
+}
+
+const Component = (props: ComponentProps) => {
+  // hover over the onclick and it will tell you the type
+  return <button onClick={props.onClick}>Hello</button>;
+};
+
+export default function Home() {
+  return (
+    <Component
+      onClick={(e) => {
+        console.log(e.target.value);
+      }}
+    />
+  );
+}
+```
+
+### USING PROPS WITH CHILDREN
+
+- helps with autocomplete
+
+```ts
+import { ReactNode } from "react";
+
+interface ComponentProps {
+  children?: ReactNode;
+}
+
+const Component = (props: ComponentProps) => {
+  console.log("props: ", props.children);
+
+  return <h1>Hello</h1>;
+};
+
+export default function Home() {
+  return (
+    <Component>
+      <div></div>
+      <span></span>
+    </Component>
+  );
+}
+```

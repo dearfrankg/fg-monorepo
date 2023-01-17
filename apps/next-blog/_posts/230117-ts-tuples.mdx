@@ -1,0 +1,52 @@
+---
+date: "2023-01-17"
+thumbnail: /assets/coder-cartoon.jpg
+title: Tuples and Arrays in TypeScript
+description: TypeScript offers JavaScript developers a robust solution to writing bug-minimal code. It offers more types and stronger type-checking than JavaScript. We’ll be exploring tuples and arrays in TypeScript.
+---
+
+## SOURCE
+
+- https://www.educative.io/answers/arrays-vs-tuples-in-typescript
+
+## TUPLES VS ARRAYS
+
+Why do we need tuples?
+
+We need them to store data in an unchanging array, e.g., an employee’s personal information.
+
+BASIC TUPLE
+
+```ts
+const primaryColors: [string, string, string] = ["#ff0000", "#00ff00", "#0000ff"];
+console.log(primaryColors);
+// [ '#ff0000', '#00ff00', '#0000ff' ]
+```
+
+```ts
+const primaryColors: [string, string] = ["#ff0000", "#00ff00", "#0000ff"];
+// throws an error because there's an extra string
+```
+
+```ts
+const primaryColors: [string, string, string] = ["#00ff00", "#0000ff"];
+// throws an error because all strings have not been provided
+```
+
+TUPLES WITH DIFFERENT DATA TYPES
+
+```ts
+const nameAge: [string, number, string, number] = ["Osinachi", 10011, "frank", 3556];
+console.log(nameAge);
+// [ 'Osinachi', 10011, 'frank', 3556 ]
+```
+
+The structure of the tuple needs to stay the same (a string, number, string, number), whereas the array
+can have any combination of the two types specified (this can be extended to as many types as is
+required).
+
+```ts
+const nameAge: (string | number)[] = ["Osinachi", 10011, 12345, "Victor", "frank", 3556];
+console.log(nameAge);
+// [ 'Osinachi', 10011, 12345, 'Victor', 'frank', 3556 ]
+```
