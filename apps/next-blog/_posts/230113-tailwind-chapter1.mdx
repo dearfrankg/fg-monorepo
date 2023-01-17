@@ -1,7 +1,7 @@
 ---
 date: "2023-01-13"
 thumbnail: /assets/coder-cartoon.jpg
-title: Tailwind Chapter 1
+title: Tailwind Tutorial
 description: Tailwind CSS makes it quicker to write and maintain the code of your application. By using this utility-first framework, you don't have to write custom CSS to style your application.
 ---
 
@@ -20,24 +20,55 @@ description: Tailwind CSS makes it quicker to write and maintain the code of you
 - vs-code-plugins: inline-fold, tailwind-css-intellisense, live-server
 - node
 
-## LESSON 1 -- SETUP
+## INTO
 
-### CONFIGURE LIVE SERVER
+Sections to cover
 
-To configure live server to auto reload
+- Section 1 -- Setup
+- Section 2 -- Example
 
-- open live-server plugin
-- click the gear
-- append `full server` and hit enter
-- click checkbox: `By Default....`
+## SETUP
 
 ### CONFIGURE TAILWINDCSS
 
-CREATE AND POPULATE CONFIG FILE
+WE WILL BE CREATING THIS FILE TREE
 
-configure tailwind to work on all html file under the build directory
+```text
+├── build
+│   ├── css
+│   │   └── style.css
+│   ├── img
+│   └── index.html
+├── src
+│   └── input.css
+|── package.json
+└── tailwind.config.js
+```
 
-- `npx tailwindcss init` --- creates a tailwind config file
+CREATE FILE TREE
+
+```bash
+npm init -y                             # create package.json
+npm i -D prettier-plugin-tailwindcss    # install package
+npx tailwindcss init                    # creates a tailwind config file
+mkdir -p build/css build/img src        # create subdirectories
+touch ./build/index.html                # create HTML file
+touch ./src/input.css                   # create CSS file
+
+# style.css is generated for you
+```
+
+POPULATE PACKAGE.JSON FILE
+
+```json
+  "scripts": {
+    "tailwind": "npx tailwindcss -i ./src/input.css -o ./build/css/style.css --watch",
+    "prettier": "npx prettier --write '**/*.html'"
+  },
+```
+
+POPULATE TAILWIND CONFIG FILE
+
 - add `"./build/*.html"` into the content array
 
 ```json
@@ -52,21 +83,7 @@ module.exports = {
 };
 ```
 
-CREATE TREE
-
-- create missing folders and files in the following tree minus the `style.css` file
-
-```text
-├── build
-│   ├── css
-│   │   └── style.css
-│   └── index.html
-├── src
-│   └── input.css
-└── tailwind.config.js
-```
-
-POPULATE input.css
+POPULATE CSS FILE
 
 - populate with the basic tailwind modules
 
@@ -77,9 +94,16 @@ POPULATE input.css
 @tailwind utilities;
 ```
 
-POPULATE index.html
+To disable warnings in this file:
+
+- goto vscode settings
+- type `unknown`
+- click checkbox: `CSS lint unknown at rule`
+
+POPULATE HTML FILE
 
 - populate with basic html template using `!` `tab` in vs-code
+- add link line
 
 ```html
 // index.html
@@ -90,31 +114,28 @@ POPULATE index.html
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body></body>
 </html>
 ```
 
-DISABLE CSS WARNING
+### CONFIGURE LIVE SERVER
 
-- goto vscode settings
-- type `unknown`
-- click checkbox: `CSS lint unknown at rule`
+CONFIGURE LIVE SERVER AUTO UPDATE
 
-COMPILE CSS
+- open live-server plugin
+- click the gear
+- append `full server` and hit enter
+- click checkbox: `By Default....`
 
-Compile our css file into our final css file
+This will open the html file in the browser.
 
-- `npx tailwindcss -i ./src/input.css -o ./build/css/style.css` -- compile css
-- `npx tailwindcss -i ./src/input.css -o ./build/css/style.css --watch` -- compile css on file change
+START TAILWIND AUTO UPDATE
 
-INCLUDE FINAL CSS IN OUR HTML FILE
+- `npm run tailwind`
 
-add this line to the head section of the html file
-
-```html
-<link rel="stylesheet" href="css/style.css" />
-```
+This will watch for tailwind changes and update the browser.
 
 ## USING TAILWINDCSS
 
@@ -199,6 +220,6 @@ Add a radial background color to the body
 </body>
 ```
 
-## THE RESULT
+THE RESULT
 
 ![target](/assets/tailwind.png)
